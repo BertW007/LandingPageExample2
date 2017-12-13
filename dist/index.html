@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Company Theme</title>
+    <meta name="description" content="Company Theme">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container" role="presentation">
+    <div class="header-nav-wrapper">
+      <header role="header">
+        <h1>company theme</h1>
+        <button class="toggle-nav"
+          aria-label="toggle navigation"
+          aria-live="polite"
+          aria-pressed="false"
+          aria-controls="nav">
+          <span role="presentation"></span>
+          <span role="presentation"></span>
+          <span role="presentation"></span>
+        </button>
+      </header>
+      <nav id="nav" role="navigation" aria-expanded="false">
+        <ul role="menu">
+          <li role="menuitem">
+            <button class="nav-item" aria-label="Select menu item" aria-live="polite" aria-pressed="false">
+              projects
+            </button>
+          </li>
+          <li role="menuitem">
+            <button class="nav-item" aria-label="Select menu item" aria-live="polite" aria-pressed="false">
+              careers
+            </button>
+          </li>
+          <li role="menuitem">
+            <button class="nav-item" aria-label="Select menu item" aria-live="polite" aria-pressed="false">
+              about
+            </button>
+          </li>
+          <li role="menuitem">
+            <button class="nav-item" aria-label="Nav toggle" aria-live="polite" aria-pressed="false">
+              contact
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div role="banner"></div>
+    <main role="main">
+      <article role="article" id="main"></article>
+      <article role="article" id="story"></article>
+      <article role="article" id="about"></article>
+    </main>
+    <footer></footer>
+  </div>
+  <script src="js/bundle.js"></script>
+</body>
+</html>
