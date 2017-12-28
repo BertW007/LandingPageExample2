@@ -42,12 +42,13 @@ a:link, a:visited, a:active {
   color: $links-color;
 }
 a:focus {
-  outline: 2px solid $outline-color
+  outline: 0;
 }
 a:hover {
   color: $links-hov-color;
 }
 nav {
+  display: none;
   ul {
     list-style: none;
   }
@@ -58,9 +59,6 @@ button {
   font-weight:lighter;
   cursor: pointer;
   text-transform: uppercase;
-  &:focus {
-    outline: 2px solid $outline-color;
-  }
 }
 header {
   color: $header-text-color;
@@ -87,7 +85,12 @@ footer {
   justify-content: center;
   background-color: $footer-background-color;
   text-transform: capitalize;
-  padding: 20px;
+  padding: 0px 20px 20px 20px;
+}
+.outline {
+  &:focus {
+    outline: 2px solid $outline-color;
+  }
 }
 .header-nav-wrapper {
   position: fixed;
@@ -116,6 +119,7 @@ nav li:last-child .nav-item {
   padding: 8px;
   flex-shrink: 0;
   margin: 20px;
+  transition: background-color 1s;
   .icon-part {
     display: block;
     margin: 5px auto;
@@ -123,6 +127,13 @@ nav li:last-child .nav-item {
     width: 30px;
     border: 0;
     background-color: $header-button-icon-part-color;
+    transition: background-color 1s;
+  }
+}
+.nav-open {
+  border-color: $header-button-border-pressed-color;
+  .icon-part {
+    background-color: $header-button-icon-part-pressed-color;
   }
 }
 .banner {
@@ -225,6 +236,7 @@ nav li:last-child .nav-item {
     text-shadow: 0px 1px $header-text-shadow-color;
   }
   nav {
+    display: block !important; //override velocity inline styles
     ul {
       li {
         display: inline-block;
