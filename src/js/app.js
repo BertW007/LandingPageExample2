@@ -43,25 +43,40 @@ const handleNavSlide = () => {
   }
 
   button.on('click', () => {
-    const navDisplay = nav.css('display');
     const isVelocityAnimating = nav.hasClass('velocity-animating');
+    const isNavOpen = button.hasClass('nav-open');
 
-    navDisplay === 'none' && !isVelocityAnimating?
+    !isNavOpen && !isVelocityAnimating?
     (
       button.attr('aria-pressed','true'),
       button.addClass('nav-open'),
       nav.attr('aria-expanded', 'true'),
-      animateButtonParts(),
-      nav.velocity('slideDown', {duration: 500, easing: 'ease-in'})
+      nav.velocity('slideDown', {duration: 500, easing: 'ease-in', begin: animateButtonParts})
     ):
     (
       button.attr('aria-pressed','false'),
       button.removeClass('nav-open'),
       nav.attr('aria-expanded', 'false'),
-      reverseAnimateButtonParts(),
-      nav.velocity('slideUp', {duration: 500, easing: 'ease-out'})
+      nav.velocity('slideUp', {duration: 500, easing: 'ease-out', begin: reverseAnimateButtonParts})
     );
   });
 }
 
 handleNavSlide();
+
+const handleNavButtonsScrollToTarget = () => {
+  const navItems = $('.nav-item');
+
+  const scrollToTarget = (item) => {
+    const target = item.innerText.trim().toLowerCase();
+    $(item).on('click',() => {
+      $('#' + target).velocity('scroll', {duration: 1000, easing: 'ease-out'});
+    });
+  }
+
+  navItems.each((key,item) => {
+    scrollToTarget(item);
+  });
+}
+
+handleNavButtonsScrollToTarget();
