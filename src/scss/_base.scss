@@ -87,6 +87,62 @@ footer {
   text-transform: capitalize;
   padding: 0px 20px 20px 20px;
 }
+#contact {
+  background-color: rgba(35,52,52,1);
+  padding: 100px 20px 100px 20px;
+  color: rgba(255,255,255,1);
+  h3 {
+    margin: 10px 0 10px 0;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(35,52,52,1);
+    color: rgba(255,255,255,1);
+    input {
+      font-size: $contact-font-size;
+      height: 40px;
+      background-color: rgba(34,34,34,1);
+      margin-bottom: 10px;
+      color: rgba(255,255,255,1);
+      padding: 10px;
+      border-radius: 5px;
+      &[type="submit"] {
+        background-color: rgba(255,255,255,1);
+        color: $contact-input-font-color;
+        text-transform: uppercase;
+        &:hover {
+          background-color: rgba(255,182,71,1);
+        }
+      }
+    }
+    textarea {
+      font-size: $contact-font-size;
+      padding: 10px;
+      color: rgba(255,255,255,1);
+      background-color: rgba(34,34,34,1);
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+  }
+  ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    li {
+      display: flex;
+      align-items: center;
+      img {
+        margin: 5px;
+      }
+      span {
+        margin: 5px;
+      }
+    }
+  }
+}
+
+
 .outline {
   &:focus {
     outline: 2px solid $outline-color;
@@ -230,6 +286,25 @@ nav li:last-child .nav-item {
   }
   .footer-links {
     text-align: left;
+  }
+  #contact {
+    h3 {
+      width: 70%;
+      margin: 10px auto;
+    }
+    form {
+      width: 70%;
+      margin: 0 auto;
+      input {
+        &[type="submit"] {
+          width: 200px;
+        }
+      }
+    }
+    ul {
+      width: 70%;
+      margin: 0 auto;
+    }
   }
   header {
     box-shadow: none;

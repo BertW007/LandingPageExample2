@@ -80,3 +80,11 @@ const handleNavButtonsScrollToTarget = () => {
 }
 
 handleNavButtonsScrollToTarget();
+
+const handleEmailAddress = () => {
+  const mail = $('.contact-email');
+  const adr = mail.text().trim().toLowerCase().replace('(at)', '@').replace(/\(dot\)/g, '.');
+  mail.text(adr);
+}
+
+handleEmailAddress();
