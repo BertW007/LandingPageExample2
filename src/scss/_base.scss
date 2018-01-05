@@ -87,9 +87,7 @@ footer {
   text-transform: capitalize;
   padding: 0px 20px 20px 20px;
 }
-#projects {
-  padding: 0px;
-}
+
 #contact {
   background-color: rgba(35,52,52,1);
   padding: 100px 20px 100px 20px;
@@ -245,6 +243,7 @@ nav li:last-child .nav-item {
         width: 80%;
         margin: 25px auto;
         text-align: center;
+        color: rgba(0,0,0,1);
       }
     }
     img {
@@ -345,7 +344,7 @@ nav li:last-child .nav-item {
     flex-direction: row;
     flex-wrap: wrap;
     li {
-      width: 33.33333333%;
+      width: 50%;
     }
   }
   .footer-links {
