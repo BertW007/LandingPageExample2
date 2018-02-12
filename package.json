@@ -2,7 +2,7 @@
   "name": "companytheme",
   "version": "1.0.0",
   "description": "JS for Company Theme",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --hot --inline --watch-poll --port 3008 --content-base dist",
