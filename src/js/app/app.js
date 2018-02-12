@@ -1,13 +1,13 @@
 import $ from 'jquery';
 import velocity from 'velocity-animate';
 import Events from './events';
-//import loader from './loader';
+// import loader from './loader';
 import config from './config';
 
 export default class App {
   constructor(name) {
     try {
-      !$ || !velocity || !Events? // !$ || !velocity || !Events || !loader
+      !$ || !velocity || !Events?
       this.throwError('App creation faild. Unable to find one or more dependencies'):
       !name? this.throwError('App creation faild. App name not provided'):
       this.query = $('#' + name);
@@ -23,7 +23,7 @@ export default class App {
 
   createModules() {
     this.events = new Events();
-    //this.imagesLoaded = loader();
+    // this.imagesLoaded = loader();
     this.modules = config.app.MODULES.map((creator) => {
       try {
         let module;
@@ -36,7 +36,6 @@ export default class App {
         module.emit = this.events.emit.bind(this.events);
         module.sub = this.events.on.bind(this.events);
         module.find = this.find.bind(this);
-        module.log = this.logs.log.bind(this);
 
         return module;
 
@@ -61,9 +60,9 @@ export default class App {
   }
 
   handleRemove() {
-    //this.loader.remove();
-    //delete this.loader;
-    //delete this.imagesLoaded;
+    // this.loader.remove();
+    // delete this.loader;
+    // delete this.imagesLoaded;
   }
 
   handleIn() {
@@ -91,7 +90,7 @@ export default class App {
   }
 
   init() {
-  //  this.loader = $('#loader');
+    // this.loader = $('#loader');
     this.initModules();
     console.log(this);
     // Promise.all(this.imagesLoaded).then(() => {

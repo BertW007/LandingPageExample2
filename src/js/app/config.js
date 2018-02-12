@@ -1,10 +1,12 @@
-
+import Outlines from './modules/outlines'
 const config = {
   app: {
     NAME: 'ctheme',
     LOG: true,
     LANG: { default: 'en' },
-    MODULES: [],
+    MODULES: [
+      Outlines,
+    ],
     RULES: {
       _isFunction: (functionToCheck) => {
         return functionToCheck && typeof functionToCheck === 'function';
