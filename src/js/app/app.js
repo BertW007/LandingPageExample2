@@ -7,7 +7,7 @@ import config from './config';
 export default class App {
   constructor(name) {
     try {
-      !$ || !velocity || !Events?
+      !$ || !velocity || !Events? // && loader
       this.throwError('App creation faild. Unable to find one or more dependencies'):
       !name? this.throwError('App creation faild. App name not provided'):
       this.query = $('#' + name);
