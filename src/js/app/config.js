@@ -1,4 +1,6 @@
-import Outlines from './modules/outlines'
+import Outlines from './modules/outlines';
+import Email from './modules/email';
+
 const config = {
   app: {
     NAME: 'ctheme',
@@ -6,6 +8,7 @@ const config = {
     LANG: { default: 'en' },
     MODULES: [
       Outlines,
+      Email,
     ],
     RULES: {
       _isFunction: (functionToCheck) => {
