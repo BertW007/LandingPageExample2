@@ -25,30 +25,34 @@ const appCreate = (app, config, logs) => {
   catch(e) {
     lgs.log(e);
   }
-  // Stop App
+
   const stop = () => {
     delete namespace[ config.app.NAME ];
   }
-  // Start App
+
   const start = () => {
-    const init = () => {
-      try {
-        config.app.RULES._isFunction(namespace[ config.app.NAME ].init)?
-        namespace[ config.app.NAME ].init():
-        throwError('Unable to init app');
-      }
-      catch(e) {
-        lgs.log(e);
-      }
+
+  const init = () => {
+    try {
+      config.app.RULES._isFunction(namespace[ config.app.NAME ].init)?
+      namespace[ config.app.NAME ].init():
+      throwError('Unable to init app');
     }
-  // Remove App
+    catch(e) {
+      lgs.log(e);
+    }
+  }
+
   const remove = () => {
     $(window).off('load', init);
+    stop();
     window.removeEventListener('unload', remove);
   }
 
-  window.addEventListener('unload', remove);
+  // Start App
   $(window).on('load', init);
+  // Remove App
+  window.addEventListener('unload', remove);
   }
 
   return start;
