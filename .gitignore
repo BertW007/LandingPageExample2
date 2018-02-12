@@ -4,3 +4,5 @@ node_modules
 *.jpg
 *.jpeg
 *.svg
+*.firebaserc
+firebase.json

@@ -70,7 +70,7 @@ const handleNavButtonsScrollToTarget = () => {
   const scrollToTarget = (item) => {
     const target = item.innerText.trim().toLowerCase();
     $(item).on('click',() => {
-      $('#' + target).velocity('scroll', {duration: 1000, easing: 'ease-out'});
+      $('#' + target).velocity('scroll', {duration: 2000, easing: 'ease-out' });
     });
   }
 
