@@ -4,7 +4,8 @@
 * JQuery,
     - velocity-animate,
 * ScrollReveal,
-* CSS *[ positioning: Flexbox(no floats) ]*
+* CSS *[ positioning: Flexbox(no floats) ]*,
+* RWD,
 * Sass,
     - autoprefixer
     - extract-text-webpack-plugin
