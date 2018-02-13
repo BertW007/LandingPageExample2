@@ -3,11 +3,11 @@ import Module from '../module';
 export default class Nav extends Module {
   constructor() {
     super();
+    this.content = this.find('nav');
+    this.button = this.find('.toggle-nav');
+    this.buttonParts = this.find('.icon-part');
+    this.navButtons = this.find('.nav-item');
     this.slideSpeed = 'slow';
-    this.buttonId = '.toggle-nav';
-    this.buttonPartId = '.icon-part';
-    this.contentId = 'nav';
-    this.contentButtonId = '.nav-item';
     this.buttonStateId = 'aria-pressed';
     this.contentStateId = 'aria-expanded';
     this.buttonStateVariants = [
@@ -40,13 +40,12 @@ export default class Nav extends Module {
     this.getState(this.button, this.buttonStateId)?
     this.animateButtonParts():
     this.reverseAnimateButtonParts();
-    this.toggleButtonClass(this.button);
   }
 
   animateButtonParts() {
-    $(this.buttonParts[0]).velocity({translateY: '8px',rotateZ: '135deg'},{duration: 300});
-    $(this.buttonParts[1]).velocity({translateX: '-40px',opacity: 0},{duration: 300});
-    $(this.buttonParts[2]).velocity({translateY: '-8px', rotateZ: '-135deg'},{duration: 300,
+    $(this.buttonParts[0]).velocity('stop').velocity({translateY: '8px',rotateZ: '135deg'},{duration: 300});
+    $(this.buttonParts[1]).velocity('stop').velocity({translateX: '-40px',opacity: 0},{duration: 300});
+    $(this.buttonParts[2]).velocity('stop').velocity({translateY: '-8px', rotateZ: '-135deg'},{duration: 300,
     complete: () => {
       this.button.on('click', this.handleButtonClick.bind(this));
     }});
@@ -68,6 +67,7 @@ export default class Nav extends Module {
   handleButtonClick() {
     this.button.off('click');
     this.toggleButton(this.button);
+    this.toggleButtonClass(this.button);
     this.toggleButtonView();
     this.toggleContent();
   }
@@ -88,12 +88,13 @@ export default class Nav extends Module {
           target = $('#' + e.currentTarget.innerText.trim().toLowerCase());
     this.setAllNavButtonPressedState(false);
     this.toggleButton(button);
-    target.velocity('scroll', {duration: 2000, offset: -60, easing: 'easeInOutCubic'});
+    target.velocity('stop').velocity('scroll', {duration: 2000, offset: -60, easing: 'easeInOutCubic'});
     this.toggleContent(768);
     $(window).width() < 768?
     (
       this.button.off('click'),
       this.toggleButton(this.button),
+      this.toggleButtonClass(this.button),
       this.toggleButtonView()
     ):
     false;
@@ -104,11 +105,7 @@ export default class Nav extends Module {
   }
 
   init() {
-    this.content = this.find(this.contentId);
-    this.button = this.find(this.buttonId);
-    this.buttonParts = this.find(this.buttonPartId);
-    this.navButtons = this.find(this.contentButtonId);
-    this.registerDomEvent(this.buttonId, 'click', this.handleButtonClick.bind(this));
-    this.registerDomEvent(this.contentButtonId, 'click', this.handleNavButtonsClick.bind(this));
+    this.registerDomEvent('.toggle-nav', 'click', this.handleButtonClick.bind(this));
+    this.registerDomEvent('.nav-item', 'click', this.handleNavButtonsClick.bind(this));
   };
 }

@@ -2,6 +2,10 @@ import config from './config';
 
 export default class Module {
 
+  constructor() {
+    this.query = $('#' + config.app.NAME);
+  }
+
   throwError (msg) {
     throw new Error(msg);
   };
@@ -32,5 +36,8 @@ export default class Module {
       o = {};
       p = {};
   };
+  find(element){
+    return this.query.find(element);
+  }
 
 }
