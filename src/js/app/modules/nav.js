@@ -7,6 +7,7 @@ export default class Nav extends Module {
     this.button = this.find('.toggle-nav');
     this.buttonParts = this.find('.icon-part');
     this.navButtons = this.find('.nav-item');
+    this.wrapper= this.find('.header-nav-wrapper');
     this.slideSpeed = 'slow';
     this.buttonStateId = 'aria-pressed';
     this.contentStateId = 'aria-expanded';
@@ -14,6 +15,10 @@ export default class Nav extends Module {
       'nav-close',
       'nav-open',
     ];
+    this.wrapperStateVariants = [
+      'scrolling',
+    ];
+    this.wrapperChangePosition = 50;
   }
 
   setState(element, stateId, state) {
@@ -104,7 +109,19 @@ export default class Nav extends Module {
     this.setState(this.navButtons, this.buttonStateId, state);
   }
 
+  getScrollPosition() {
+    return (window.pageYOffset || document.documentElement.scrollTop) - (document.documentElement.clientTop || 0);
+  }
+
+  toggleWrapper() {
+    this.getScrollPosition() > this.wrapperChangePosition?
+      this.wrapper.hasClass(this.wrapperStateVariants[0])?
+      false: this.wrapper.addClass(this.wrapperStateVariants[0]):
+    this.wrapper.removeClass(this.wrapperStateVariants[0]);
+  }
+
   init() {
+    this.registerDomEvent(window, 'scroll', this.toggleWrapper.bind(this));
     this.registerDomEvent('.toggle-nav', 'click', this.handleButtonClick.bind(this));
     this.registerDomEvent('.nav-item', 'click', this.handleNavButtonsClick.bind(this));
   };

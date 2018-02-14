@@ -2,6 +2,7 @@ import Outlines from './modules/outlines';
 import Email from './modules/email';
 import Features from './modules/features';
 import Nav from './modules/nav';
+import Banner from './modules/banner';
 
 const config = {
   app: {
@@ -13,6 +14,7 @@ const config = {
       Email,
       Features,
       Nav,
+      Banner,
     ],
     RULES: {
       _isFunction: (functionToCheck) => {
