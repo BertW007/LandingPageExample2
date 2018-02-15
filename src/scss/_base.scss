@@ -207,9 +207,11 @@ footer {
   box-shadow: 0px .5px 1px $nav-items-boxshadow-color;
   margin-top: 2px;
   transition: background-color .3s;
+  background-color: $nav-background-color;
+  color: $nav-items-text-color-md;
   &:hover {
-    background-color: $background-color;
-    color: $nav-items-text-color;
+    background-color: $nav-items-hov-background-color;
+    color: $nav-items-text-hov-color;
     box-shadow: none;
   }
 }
@@ -276,7 +278,7 @@ nav li:last-child .nav-item {
     }
     h2 {
      color: rgba(255,182,71,1);
-     font-size: 30px;
+     font-size: 40px;
      font-weight: bold;
      text-shadow: 0px .5px 1px rgba(34,34,34,1);
     }
@@ -536,11 +538,6 @@ nav li:last-child .nav-item {
     margin-top: 0;
     background-color: $transparent-color;
     box-shadow: none;
-    color: $nav-items-text-color-md;
-    &:hover {
-      background-color: $nav-items-hov-background-color;
-      color: $nav-items-text-hov-color;
-    }
   }
   .projects-list {
     flex-direction: row;
