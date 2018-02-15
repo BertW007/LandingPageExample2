@@ -100,13 +100,18 @@ footer {
   }
   button {
     background-color: rgba(35,52,52,1);
+    box-shadow: 0px .5px 0.8px $header-nav-wrapper-boxshadow-color;
     color: rgba(255,255,255,1);
-    padding: 20px;
+    padding: 10px;
     font-size: 25px;
     text-transform: uppercase;
     width: 200px;
     margin: 30px auto;
     border-radius: 5px;
+    transition: background-color 0.5s;
+    &:hover {
+      background-color: $banner-button-hov-background-color;
+    }
   }
 }
 
@@ -252,8 +257,10 @@ nav li:last-child .nav-item {
       font-size: 15px;
     }
     h2 {
-     color: rgba(173,0,58,1);
-     font-size: 20px;
+     // color: rgba(173,0,58,1);
+     font-size: 30px;
+     font-weight: bold;
+     text-shadow: 0px .5px 1px rgba(34,34,34,1);
     }
     &> * {
       width: 40%;
@@ -265,6 +272,18 @@ nav li:last-child .nav-item {
     }
     button {
       width: 200px;
+      background-color: rgba(35,52,52,1);
+      box-shadow: 0px .5px 0.8px $header-nav-wrapper-boxshadow-color;
+      color: rgba(255,255,255,1);
+      padding: 10px;
+      font-size: 25px;
+      text-transform: uppercase;
+      margin: 30px auto;
+      border-radius: 5px;
+      transition: background-color 0.5s;
+      &:hover {
+        background-color: $banner-button-hov-background-color;
+      }
     }
   }
 
@@ -479,7 +498,7 @@ nav li:last-child .nav-item {
   .banner {
     .banner-content {
       h2 {
-        font-size: 40px;
+        font-size: 50px;
       }
       p {
         font-size: 20px;
