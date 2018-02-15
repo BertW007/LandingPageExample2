@@ -17,42 +17,52 @@ body, html {
   color: $font-color;
   font-family: $paragraph-font;
 }
+
 h1,h2,h3,h4 {
   font-family: $header-font;
   text-transform: uppercase;
 }
+
 h1 {
   font-size: $header1-font-size;
   font-weight: normal;
 }
+
 h2 {
   font-size: $header2-font-size;
   font-weight: normal;
 }
+
 h3 {
   font-size: $header3-font-size;
   font-weight: normal;
 }
+
 p {
   font-size: $paragraph-font-size;
   font-weight: lighter;
 }
+
 a:link, a:visited, a:active {
   text-decoration: none;
   color: $links-color;
 }
+
 a:focus {
   outline: 0;
 }
+
 a:hover {
   color: $links-hov-color;
 }
+
 nav {
   display: none;
   ul {
     list-style: none;
   }
 }
+
 button {
   font-family: $button-font;
   font-size: $button-font-size;
@@ -60,6 +70,7 @@ button {
   cursor: pointer;
   text-transform: uppercase;
 }
+
 header {
   color: $header-text-color;
   display: flex;
@@ -71,13 +82,16 @@ header {
     margin: 15px;
   }
 }
+
 main {
   background-color: $main-background-color;
 }
+
 article {
   padding: 20px;
   color: $article-font-color;
 }
+
 footer {
   font-size: $footer-font-size;
   display: flex;
@@ -88,30 +102,36 @@ footer {
   padding: 0px 20px 20px 20px;
 }
 
+%button {
+  width: 200px;
+  background-color: rgba(35,52,52,1);
+  box-shadow: 0px .5px 0.8px $header-nav-wrapper-boxshadow-color;
+  color: rgba(255,255,255,1);
+  padding: 10px;
+  font-size: 25px;
+  text-transform: uppercase;
+  margin: 30px auto;
+  border-radius: 15px;
+  transition: background-color 0.5s;
+  transition: letter-spacing 1s;
+  &:hover {
+    background-color: $banner-button-hov-background-color;
+    letter-spacing: 1.5px;
+  }
+}
+
 #projects {
-  width: 60%;
+  width: 80%;
   margin: 0 auto;
   text-align: center;
-  padding-top: 80px;
-  padding-bottom: 100px;
+  padding-top: 20px;
+  padding-bottom: 30px;
   h2 {
     padding: 20px;
     font-size: 35px;
   }
   button {
-    background-color: rgba(35,52,52,1);
-    box-shadow: 0px .5px 0.8px $header-nav-wrapper-boxshadow-color;
-    color: rgba(255,255,255,1);
-    padding: 10px;
-    font-size: 25px;
-    text-transform: uppercase;
-    width: 200px;
-    margin: 30px auto;
-    border-radius: 5px;
-    transition: background-color 0.5s;
-    &:hover {
-      background-color: $banner-button-hov-background-color;
-    }
+    @extend %button;
   }
 }
 
@@ -249,15 +269,13 @@ nav li:last-child .nav-item {
     background-position: center;
     background-size: cover;
     display: none;
-    transform: scale(1.5);
-    opacity: 0;
     p {
       text-shadow: 0px .5px 1px rgba(34,34,34,1);
       color: rgba(255,255,255,1);
       font-size: 15px;
     }
     h2 {
-     // color: rgba(173,0,58,1);
+     color: rgba(255,182,71,1);
      font-size: 30px;
      font-weight: bold;
      text-shadow: 0px .5px 1px rgba(34,34,34,1);
@@ -271,19 +289,7 @@ nav li:last-child .nav-item {
       opacity: 0;
     }
     button {
-      width: 200px;
-      background-color: rgba(35,52,52,1);
-      box-shadow: 0px .5px 0.8px $header-nav-wrapper-boxshadow-color;
-      color: rgba(255,255,255,1);
-      padding: 10px;
-      font-size: 25px;
-      text-transform: uppercase;
-      margin: 30px auto;
-      border-radius: 5px;
-      transition: background-color 0.5s;
-      &:hover {
-        background-color: $banner-button-hov-background-color;
-      }
+      @extend %button;
     }
   }
 
@@ -432,10 +438,10 @@ nav li:last-child .nav-item {
   }
 }
 
-
 .icon-placeholder {
   display: inline-block;
 }
+
 .icons-list {
   display: flex;
   justify-content: space-around;
@@ -445,6 +451,7 @@ nav li:last-child .nav-item {
   margin: 0 auto;
   height: 100%;
 }
+
 .copyrights {
   display: flex;
   justify-content: space-around;
@@ -452,10 +459,12 @@ nav li:last-child .nav-item {
   text-transform: capitalize;
   margin-bottom: 50px;
 }
+
 .before-footer {
   height: 100px;
   background-color: $footer-background-color;
 }
+
 .footer-logo {
   font-family: $header-font;
   font-size: $header2-font-size;
@@ -464,12 +473,14 @@ nav li:last-child .nav-item {
   text-shadow: 0px 1px $footer-text-shadow-color;
   text-align: center;
 }
+
 .footer-logo-short {
   font-size: 60px;
   font-weight: bold;
   display: block;
   color: $background-color;
 }
+
 .footer-logo-short-content {
   width: 90px;
   height: 90px;
@@ -481,6 +492,7 @@ nav li:last-child .nav-item {
   align-items: center;
   margin: 10px auto;
 }
+
 .footer-links {
   width: 100%;
   padding: 15px 0px 15px 0px;

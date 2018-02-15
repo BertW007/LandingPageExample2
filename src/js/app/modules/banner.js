@@ -6,17 +6,13 @@ export default class Banner extends Module {
     this.direction = 0;
     this.delay = 5000;
     this.currentId = 'current';
-    this.animPatternVariants = [
+    this.animVariants = [
       [
         {opacity: 0, scale: 1.5},
-        {opacity: 1, scale: 1}
+        {opacity: [1, 0], scale: [1, 1.5]}
       ],
       [
-        {opacity: 0, scale: 1.5},
-        {opacity: 1, scale: 1}
-      ],
-      [
-        {opacity: [1,0], translateY: ['0px', '-50px']}
+        {opacity: [1, 0], translateY: ['0px', '-50px']}
       ]
     ];
   }
@@ -62,17 +58,6 @@ export default class Banner extends Module {
     return n;
   }
 
-
-  getAnimParameters(bg, cp, dl) {
-    return {
-      easing: 'easeOutCubic',
-      duration: 1000,
-      begin: bg,
-      complete: cp,
-      delay: dl || null,
-    }
-  }
-
   handleClick(e) {
     $(e.target).hasClass(this.leftButtonId.split('.').join("")) ?
     this.setDirection(1):
@@ -85,11 +70,11 @@ export default class Banner extends Module {
   }
 
   handleComplete() {
-      this.anim(
-        this.anx.find('>*'),
-        this.animPatternVariants[2][0],
-        this.getAnimParameters(null, null, 500)
-      );
+      this.anx.find('>*').velocity(this.animVariants[1][0],{
+        easing: 'easeOutCubic',
+        duration: 500,
+        delay: 1000,
+      })
       this.anx.addClass(this.currentId);
       this.cr.removeClass(this.currentId);
       this.cr.find('>*').css('opacity',0);
@@ -98,26 +83,25 @@ export default class Banner extends Module {
   }
 
   handleNextIn() {
-      this.anim(
-        this.anx,
-        this.animPatternVariants[this.getDirection()][1],
-        this.getAnimParameters(null, this.handleComplete.apply(this))
-      );
+    this.anx.velocity(this.animVariants[0][1], {
+      easing: 'easeOutCubic',
+      duration: 1000,
+      complete: this.handleComplete.apply(this),
+    });
   }
 
   handleCurrentOut() {
     this.anx = this.getAbsNext();
     this.cr = this.getCurrent();
-
     this.anx.length > 0?
-    this.anim(
-      this.cr,
-      this.animPatternVariants[this.getDirection()][0], this.getAnimParameters(
-        this.handleNextIn.apply(this), this.rotateBanner.apply(this)
-      )
-    ):false;
+    this.cr.velocity('stop').velocity(this.animVariants[0][0],{
+      easing: 'easeOutCubic',
+      duration: 1000,
+      begin: this.handleNextIn.apply(this),
+      complete: this.rotateBanner.apply(this),
+    }):false;
   }
-  
+
   toggleDirection() {
     this.getNext() && !this.getPrev() ? this.setDirection(0):false;
     this.getPrev() && !this.getNext() ? this.setDirection(1):false;
@@ -133,7 +117,7 @@ export default class Banner extends Module {
   }
 
   initCurrent() {
-    this.getCurrent().css('opacity',1).css('transform','scale(1)');
+    this.getCurrent().css('opacity',1).css('transform','scale(1)'); //TODO add browsers prefixes
     this.getCurrent().find('>*').css('opacity',1);
   }
 
