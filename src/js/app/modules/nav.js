@@ -7,7 +7,9 @@ export default class Nav extends Module {
     this.button = this.find('.toggle-nav');
     this.buttonParts = this.find('.icon-part');
     this.navButtons = this.find('.nav-item');
-    this.wrapper= this.find('.header-nav-wrapper');
+    this.wrapper = this.find('.header-nav-wrapper');
+    this.direction = 0;
+    this.currentPosition = 0;
     this.slideSpeed = 'slow';
     this.buttonStateId = 'aria-pressed';
     this.contentStateId = 'aria-expanded';
@@ -93,7 +95,7 @@ export default class Nav extends Module {
           target = $('#' + e.currentTarget.innerText.trim().toLowerCase());
     this.setAllNavButtonPressedState(false);
     this.toggleButton(button);
-    target.velocity('stop').velocity('scroll', {duration: 2000, offset: -60, easing: 'easeInOutCubic'});
+    target.velocity('stop').velocity('scroll', {duration: 2000, offset: 0, easing: 'easeInOutCubic'});
     this.toggleContent(768);
     $(window).width() < 768?
     (
@@ -113,6 +115,83 @@ export default class Nav extends Module {
     return (window.pageYOffset || document.documentElement.scrollTop) - (document.documentElement.clientTop || 0);
   }
 
+  spyPosition() {
+    this.emit('POS', this.getScrollPosition())
+  }
+
+  getToSpyPositions() {
+    return this.find('.spy-position');
+  }
+
+  setDirection(position) {
+    position > this.currentPosition? this.direction = 0: this.direction = 1;
+    this.currentPosition = position;
+  }
+
+  setNextAnchor(position) {
+    this.avlAn = this.toSpy.filter((key,item) => {
+      return this.direction === 0?
+      item.offsetTop > position? item: false:
+      item.offsetTop < position? item: false;
+    });
+    this.direction === 0? false: this.avlAn = this.avlAn.get().reverse();
+    // console.log(this.avlAn[0].offsetTop + this.avlAn[0].offsetHeight);
+    //this.avlAn[0].offsetTop + this.avlAn[0].offsetHeight
+    if(this.avlAn[0]) {
+      if(this.direction===0) {
+        position > this.avlAn[0].offsetTop-60? this.toggleNavItemClass(this.avlAn[0]): false;
+      }
+
+      if(this.direction===1) {
+        console.log(this.avlAn[0].offsetHeight);
+        position < this.avlAn[0].offsetTop + 60?
+        this.toggleNavItemClass(this.avlAn[0]): false;
+      }
+
+    } else {
+      this.toggleNavItemClass();
+    }
+
+    // if(this.avlAn[0]) {
+    //   !this.prevDiff? this.prevDiff = this.avlAn[0].offsetTop: false;
+    //   this.nextDiff = this.avlAn[0].offsetTop - position;
+    //
+    //   if(this.direction === 0) {
+    //     this.nextDiff > this.prevDiff? this.toggleNavItemClass(this.avlAn[0]): false;
+    //   }
+    //
+    //   if(this.direction === 1) {
+    //     this.nextDiff < this.prevDiff? console.log(this.avlAn[0]): false;
+    //   }
+    //   this.prevDiff = this.nextDiff;
+    // }
+    //
+    // if(!this.avlAn[0]) {
+    //   this.prevDiff = 0;
+    //   this.nextDiff = 0;
+    // }
+
+    // this.avlAn[0]? console.log('prev: ', this.prevDiff, 'next: ', this.nextDiff, 'pos: ', position): false;
+
+  }
+
+  toggleNavItemClass(item) {
+    if(!item) {
+      this.navButtons.removeClass('current');
+    } else {
+      const nextButton = this.navButtons.filter((key,button) => {
+        return button.innerText.trim().toLowerCase() === item.id;
+      })
+
+      const currentButton = this.navButtons.filter((key,button) => {
+        return $(button).hasClass('current') === true;
+      })
+
+      currentButton.removeClass('current');
+      !$(nextButton).hasClass('current')? $(nextButton).addClass('current'): false;
+    }
+  }
+
   toggleWrapper() {
     this.getScrollPosition() > this.wrapperChangePosition?
       this.wrapper.hasClass(this.wrapperStateVariants[0])?
@@ -121,7 +200,10 @@ export default class Nav extends Module {
   }
 
   init() {
-    this.registerDomEvent(window, 'scroll', this.toggleWrapper.bind(this));
+    this.sub('POS',this.setDirection.bind(this));
+    this.sub('POS',this.setNextAnchor.bind(this));
+    this.toSpy = this.getToSpyPositions();
+    this.registerDomEvent(window, 'scroll', this.spyPosition.bind(this));
     this.registerDomEvent('.toggle-nav', 'click', this.handleButtonClick.bind(this));
     this.registerDomEvent('.nav-item', 'click', this.handleNavButtonsClick.bind(this));
   };

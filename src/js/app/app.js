@@ -35,8 +35,9 @@ class App {
 
         module.modulePrefix = '.';
         module.moduleSuffix = '-';
-        module.emit = events.emit.bind(this.events);
-        module.sub = events.on.bind(this.events);
+        module.emit = events.emit.bind(events);
+        module.sub = events.on.bind(events);
+        module.unsub = events.off.bind(events);
 
         return module;
 

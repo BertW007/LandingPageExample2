@@ -70,7 +70,7 @@ export default class Banner extends Module {
   }
 
   handleComplete() {
-      this.anx.find('>*').velocity(this.animVariants[1][0],{
+      this.anx.find('>*').velocity('stop').velocity(this.animVariants[1][0],{
         easing: 'easeOutCubic',
         duration: 500,
         delay: 1000,
@@ -83,7 +83,7 @@ export default class Banner extends Module {
   }
 
   handleNextIn() {
-    this.anx.velocity(this.animVariants[0][1], {
+    this.anx.velocity('stop').velocity(this.animVariants[0][1], {
       easing: 'easeOutCubic',
       duration: 1000,
       complete: this.handleComplete.apply(this),
@@ -91,6 +91,7 @@ export default class Banner extends Module {
   }
 
   handleCurrentOut() {
+    clearTimeout(this.id);
     this.anx = this.getAbsNext();
     this.cr = this.getCurrent();
     this.anx.length > 0?
@@ -112,7 +113,6 @@ export default class Banner extends Module {
       this.toggleDirection()
       this.handleCurrentOut();
     }
-    clearTimeout(this.id);
     this.id = setTimeout(nextRotation, this.delay);
   }
 
