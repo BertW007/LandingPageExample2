@@ -134,44 +134,22 @@ export default class Nav extends Module {
       item.offsetTop > position? item: false:
       item.offsetTop < position? item: false;
     });
-    this.direction === 0? false: this.avlAn = this.avlAn.get().reverse();
-    // console.log(this.avlAn[0].offsetTop + this.avlAn[0].offsetHeight);
-    //this.avlAn[0].offsetTop + this.avlAn[0].offsetHeight
-    if(this.avlAn[0]) {
-      if(this.direction===0) {
-        position > this.avlAn[0].offsetTop-60? this.toggleNavItemClass(this.avlAn[0]): false;
-      }
 
-      if(this.direction===1) {
-        console.log(this.avlAn[0].offsetHeight);
+    this.direction === 0? false: this.avlAn = this.avlAn.get().reverse();
+
+    if(this.avlAn[0]) {
+      if(this.direction === 0) {
+        position > this.avlAn[0].offsetTop - 60? this.toggleNavItemClass(this.avlAn[0]): false;
+      }
+      if(this.direction === 1) {
         position < this.avlAn[0].offsetTop + 60?
         this.toggleNavItemClass(this.avlAn[0]): false;
       }
-
-    } else {
+    } else if(!this.avlAn[0] &&
+      position < this.toSpy[0].offsetTop ||
+      position > this.toSpy[this.toSpy.length -1].offsetTop) {
       this.toggleNavItemClass();
     }
-
-    // if(this.avlAn[0]) {
-    //   !this.prevDiff? this.prevDiff = this.avlAn[0].offsetTop: false;
-    //   this.nextDiff = this.avlAn[0].offsetTop - position;
-    //
-    //   if(this.direction === 0) {
-    //     this.nextDiff > this.prevDiff? this.toggleNavItemClass(this.avlAn[0]): false;
-    //   }
-    //
-    //   if(this.direction === 1) {
-    //     this.nextDiff < this.prevDiff? console.log(this.avlAn[0]): false;
-    //   }
-    //   this.prevDiff = this.nextDiff;
-    // }
-    //
-    // if(!this.avlAn[0]) {
-    //   this.prevDiff = 0;
-    //   this.nextDiff = 0;
-    // }
-
-    // this.avlAn[0]? console.log('prev: ', this.prevDiff, 'next: ', this.nextDiff, 'pos: ', position): false;
 
   }
 
