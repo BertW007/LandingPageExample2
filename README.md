@@ -4,6 +4,7 @@
 * JQuery,
     - velocity-animate,
 * ScrollReveal,
+* Charts.js,
 * CSS *[ positioning: Flexbox(no floats) ]*,
 * RWD,
 * Sass,
