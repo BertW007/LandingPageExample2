@@ -119,7 +119,7 @@ footer {
   }
 }
 
-#projects {
+#projects, #careers, #about {
   width: 80%;
   margin: 0 auto;
   text-align: center;
@@ -134,10 +134,36 @@ footer {
   }
 }
 
-#careers, #about {
+#careers {
   height: 100vh;
   width: 100%;
 }
+
+.about-charts {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  padding: 10px;
+  .about-charts-item, .about-charts-item-col-1 {
+    width: 100%;
+    padding: 10px;
+    .about-charts-item-chart {
+      width: 100%;
+      height: 300px;
+      position: relative;
+      padding: 10px;
+    }
+    .about-charts-item-info {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      h3 {
+        padding: 10px;
+      }
+    }
+  }
+ }
+
 
 #contact {
   background-color: rgba(35,52,52,1);
@@ -334,10 +360,6 @@ nav li:last-child .nav-item {
     background-image: url($banner-next-button);
     right: 5%;
   }
-}
-
-.scrolling {
-
 }
 
 .banner-short {
@@ -572,6 +594,12 @@ nav li:last-child .nav-item {
       }
     }
   }
+  .about-charts {
+    .about-charts-item {
+      width: 50%;
+    }
+  }
+
   .footer-links {
     text-align: left;
   }

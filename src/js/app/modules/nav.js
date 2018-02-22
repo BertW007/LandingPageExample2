@@ -17,10 +17,6 @@ export default class Nav extends Module {
       'nav-close',
       'nav-open',
     ];
-    this.wrapperStateVariants = [
-      'scrolling',
-    ];
-    this.wrapperChangePosition = 50;
   }
 
   setState(element, stateId, state) {
@@ -50,9 +46,9 @@ export default class Nav extends Module {
   }
 
   animateButtonParts() {
-    $(this.buttonParts[0]).velocity('stop').velocity({translateY: '8px',rotateZ: '135deg'},{duration: 300});
-    $(this.buttonParts[1]).velocity('stop').velocity({translateX: '-40px',opacity: 0},{duration: 300});
-    $(this.buttonParts[2]).velocity('stop').velocity({translateY: '-8px', rotateZ: '-135deg'},{duration: 300,
+    $(this.buttonParts[0]).velocity('stop').velocity({translateY: '8px',rotateZ: '135deg'}, {duration: 300});
+    $(this.buttonParts[1]).velocity('stop').velocity({translateX: '-40px',opacity: 0}, {duration: 300});
+    $(this.buttonParts[2]).velocity('stop').velocity({translateY: '-8px', rotateZ: '-135deg'}, {duration: 300,
     complete: () => {
       this.button.on('click', this.handleButtonClick.bind(this));
     }});
@@ -116,41 +112,41 @@ export default class Nav extends Module {
   }
 
   spyPosition() {
-    this.emit('POS', this.getScrollPosition())
+    this.setParameters();
+    this.setNextAnchor();
   }
 
   getToSpyPositions() {
     return this.find('.spy-position');
   }
 
-  setDirection(position) {
+  setParameters() {
+    const position = this.getScrollPosition();
     position > this.currentPosition? this.direction = 0: this.direction = 1;
     this.currentPosition = position;
   }
 
-  setNextAnchor(position) {
-    this.avlAn = this.toSpy.filter((key,item) => {
+  setNextAnchor() {
+    this.availableAnchor = this.toSpy.filter((key,item) => {
       return this.direction === 0?
-      item.offsetTop > position? item: false:
-      item.offsetTop < position? item: false;
+      item.offsetTop > this.currentPosition? item: false:
+      item.offsetTop < this.currentPosition? item: false;
     });
 
-    this.direction === 0? false: this.avlAn = this.avlAn.get().reverse();
+    this.direction === 0? false: this.availableAnchor = this.availableAnchor.get().reverse();
 
-    if(this.avlAn[0]) {
-      if(this.direction === 0) {
-        position > this.avlAn[0].offsetTop - 60? this.toggleNavItemClass(this.avlAn[0]): false;
-      }
-      if(this.direction === 1) {
-        position < this.avlAn[0].offsetTop + 60?
-        this.toggleNavItemClass(this.avlAn[0]): false;
-      }
-    } else if(!this.avlAn[0] &&
-      position < this.toSpy[0].offsetTop ||
-      position > this.toSpy[this.toSpy.length -1].offsetTop) {
+    if (this.availableAnchor[0]) {
+      this.direction === 0?
+      this.currentPosition > this.availableAnchor[0].offsetTop - 60?
+      this.toggleNavItemClass(this.availableAnchor[0]): false:
+      this.currentPosition < this.availableAnchor[0].offsetTop + 60?
+      this.toggleNavItemClass(this.availableAnchor[0]): false;
+    }
+    else if (!this.availableAnchor[0] &&
+      this.currentPosition < this.toSpy[0].offsetTop ||
+      this.currentPosition > this.toSpy[this.toSpy.length -1].offsetTop) {
       this.toggleNavItemClass();
     }
-
   }
 
   toggleNavItemClass(item) {
@@ -158,28 +154,19 @@ export default class Nav extends Module {
       this.navButtons.removeClass('current');
     } else {
       const nextButton = this.navButtons.filter((key,button) => {
-        return button.innerText.trim().toLowerCase() === item.id;
-      })
+        return $(button).text().trim().toLowerCase() === item.id;
+      });
 
       const currentButton = this.navButtons.filter((key,button) => {
         return $(button).hasClass('current') === true;
-      })
+      });
 
       currentButton.removeClass('current');
-      !$(nextButton).hasClass('current')? $(nextButton).addClass('current'): false;
+      !nextButton.hasClass('current')? $(nextButton).addClass('current'): false;
     }
   }
 
-  toggleWrapper() {
-    this.getScrollPosition() > this.wrapperChangePosition?
-      this.wrapper.hasClass(this.wrapperStateVariants[0])?
-      false: this.wrapper.addClass(this.wrapperStateVariants[0]):
-    this.wrapper.removeClass(this.wrapperStateVariants[0]);
-  }
-
   init() {
-    this.sub('POS',this.setDirection.bind(this));
-    this.sub('POS',this.setNextAnchor.bind(this));
     this.toSpy = this.getToSpyPositions();
     this.registerDomEvent(window, 'scroll', this.spyPosition.bind(this));
     this.registerDomEvent('.toggle-nav', 'click', this.handleButtonClick.bind(this));
