@@ -4,6 +4,7 @@ import Features from './modules/features';
 import Nav from './modules/nav';
 import Banner from './modules/banner';
 import Charts from './modules/charts';
+import Clients from './modules/clients';
 
 const config = {
   app: {
@@ -17,6 +18,7 @@ const config = {
       Nav,
       Banner,
       Charts,
+      Clients,
     ],
     RULES: {
       _isFunction: (functionToCheck) => {

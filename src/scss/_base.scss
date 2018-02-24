@@ -134,9 +134,17 @@ footer {
   }
 }
 
-#careers {
-  height: 100vh;
-  width: 100%;
+.careers-opportunities {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  .careers-opportunities-item {
+    padding: 10px;
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
 }
 
 .about-charts {
@@ -278,7 +286,7 @@ nav li:last-child .nav-item {
     background-color: $header-button-icon-part-pressed-color;
   }
 }
-.banner {
+.banner, .clients  {
   display: flex;
   position: relative;
   flex-direction: column;
@@ -339,7 +347,7 @@ nav li:last-child .nav-item {
     display: flex;
   }
 
-  .banner-controls-left,.banner-controls-right {
+  .banner-controls-left,.banner-controls-right, .clients-controls-left, .clients-controls-right {
     width: 40px;
     height: 40px;
     position: absolute;
@@ -359,6 +367,48 @@ nav li:last-child .nav-item {
   .banner-controls-right {
     background-image: url($banner-next-button);
     right: 5%;
+  }
+}
+
+.clients {
+  height: auto;
+  h2 {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    margin-top: 30px;
+    color: rgba(34,34,34,1);
+    text-align: center;
+  }
+  .clients-content {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 40px;
+    opacity: 0;
+    p, h2 {
+      width: 60%;
+      margin: 40px auto;
+      text-align: center;
+      color: rgba(34,34,34,1);
+    }
+    p:last-child {
+      font-size: 14px;
+      color: rgba(0,0,0,.5);
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+  }
+  .clients-controls-left {
+    background-image: url($clients-prev-button);
+    left: 5%;
+  }
+  .clients-controls-right {
+    background-image: url($clients-next-button);
+    right: 5%;
+  }
+  .current {
+    display: flex;
   }
 }
 
@@ -599,7 +649,9 @@ nav li:last-child .nav-item {
       width: 50%;
     }
   }
-
+  .careers-opportunities {
+    flex-wrap: nowrap;
+  }
   .footer-links {
     text-align: left;
   }
