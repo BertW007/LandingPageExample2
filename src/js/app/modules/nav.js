@@ -8,6 +8,7 @@ export default class Nav extends Module {
     this.buttonParts = this.find('.icon-part');
     this.navButtons = this.find('.nav-item');
     this.wrapper = this.find('.header-nav-wrapper');
+    this.articles = this.find('article')
     this.direction = 0;
     this.currentPosition = 0;
     this.slideSpeed = 'slow';
@@ -103,6 +104,17 @@ export default class Nav extends Module {
     false;
   }
 
+  handleFooterlinksClick(e) {
+    e.preventDefault();
+    const targetLink = $(e.currentTarget).attr('href');
+    const targetAnchor = this.articles.filter((key, article) => {
+      return $(article).attr('id') === targetLink.replace("#",'');
+    });
+    targetAnchor.length > 0?
+    targetAnchor.velocity('stop').velocity('scroll', {duration: 2000, offset: 0, easing: 'easeInOutCubic'}):
+    false;
+  }
+
   setAllNavButtonPressedState(state) {
     this.setState(this.navButtons, this.buttonStateId, state);
   }
@@ -171,5 +183,6 @@ export default class Nav extends Module {
     this.registerDomEvent(window, 'scroll', this.spyPosition.bind(this));
     this.registerDomEvent('.toggle-nav', 'click', this.handleButtonClick.bind(this));
     this.registerDomEvent('.nav-item', 'click', this.handleNavButtonsClick.bind(this));
+    this.registerDomEvent('.footer-links li a', 'click', this.handleFooterlinksClick.bind(this));
   };
 }
