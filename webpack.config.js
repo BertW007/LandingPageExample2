@@ -14,16 +14,17 @@ module.exports = {
   },
   module: {
     rules: [
-      {loader: 'eslint-loader'},
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: {
+        use: [{
           loader: 'babel-loader',
           options: {
             presets: 'env'
           }
-        }
+        },
+        {loader: 'eslint-loader'}
+        ]
       },
       {
         test: /\.scss$/,
@@ -44,14 +45,14 @@ module.exports = {
         ]
       },
       {
-        test: /\.png|jpg|gif|svg$/,
+        test: /\.(png|jpg|gif|svg)$/,
         use: {
           loader: 'url-loader',
           options: {limit: 10000, outputPath: 'img/', publicPath: '../img'}
         }
       },
       {
-        test: /\.eot|ttf|woff|woff2$/,
+        test: /\.(eot|ttf|woff|woff2)$/,
         use: {
           loader: 'url-loader',
           options: {limit: 10000, outputPath: 'fonts/', publicPath: '../fonts'}
