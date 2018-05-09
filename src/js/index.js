@@ -1,3 +1,3 @@
-import Start from './app/app';
-import '../scss/main.scss';
-Start();
+import Start from './app/app'
+import '../scss/main.scss'
+Start()

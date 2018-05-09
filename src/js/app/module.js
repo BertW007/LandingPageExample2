@@ -1,43 +1,41 @@
-import config from './config';
+import config from './config'
+import $ from 'jquery'
 
 export default class Module {
-
-  constructor() {
-    this.query = $('#' + config.app.NAME);
+  constructor () {
+    this.query = $('#' + config.app.NAME)
   }
 
   throwError (msg) {
-    throw new Error(msg);
+    throw new Error(msg)
   };
 
   registerDomEvent (element, type, fn) {
-    let target = config.app.RULES._isString(element)? this.find(element): $(element);
-    target.on(type, fn);
+    let target = config.app.RULES._isString(element) ? this.find(element) : $(element)
+    target.on(type, fn)
 
     const removeEvent = () => {
-      target.off(type);
-      window.removeEventListener('unload', removeEvent);
-      target = null;
+      target.off(type)
+      window.removeEventListener('unload', removeEvent)
+      target = null
     }
-    window.addEventListener('unload', removeEvent);
+    window.addEventListener('unload', removeEvent)
   };
 
-  onWindowUnload(fn) {
+  onWindowUnload (fn) {
     const remove = () => {
-      config.app.RULES._isFunction(fn)? fn(): false;
-      window.removeEventListener('unload', remove);
+      if (config.app.RULES._isFunction(fn)) {
+        fn()
+      }
+      window.removeEventListener('unload', remove)
     }
-    window.addEventListener('unload', remove);
-  };
-
-  anim(e, o, p) {
-      e.velocity('stop').velocity(o, p);
-      e = {};
-      o = {};
-      p = {};
-  };
-  find(element){
-    return this.query.find(element);
+    window.addEventListener('unload', remove)
   }
 
+  anim (e, o, p) {
+    e.velocity('stop').velocity(o, p)
+  }
+  find (element) {
+    return this.query.find(element)
+  }
 }
